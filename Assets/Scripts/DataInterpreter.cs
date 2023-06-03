@@ -16,14 +16,14 @@ public class DataInterpreter : MonoBehaviour
         return DataInterpolator.Data[0].responses;
     }
 
-    public int[] GetPercentages()
+    /*public int[] GetPercentages()
     {
         int[] percentages = new int[GetValues().Length];
 
         return a;
-    }
+    }*/
 
-    public int[][] GetValues()
+    /*public int[][] GetValues()
     {
         int X = DataInterpolator.Data.Length; // X = Age
         int Y = Data // Y = Frequency of response
@@ -32,7 +32,7 @@ public class DataInterpreter : MonoBehaviour
         for(int i = 0; i<DataInterpolator.Data.Length)
 
         return DataInterpolator.Data[];
-    }
+    }*/
 
 
     void Start()
