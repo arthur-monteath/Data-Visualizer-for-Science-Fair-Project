@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DataInterpolator : MonoBehaviour
 {
-    [SerializeField] private DataSO[] data;
+    public static DataSO[] Data { get; private set; }
 
     private void Awake()
     {
-        for(int i = 0; i < data.Length; i++)
+        for(int i = 0; i < Data.Length; i++)
         {
-            if (data[i] == null)
+            if (Data[i] == null)
             {
                 InterpolateMissingData(i);
             }
@@ -23,12 +23,12 @@ public class DataInterpolator : MonoBehaviour
 
         for(int q = i-1; q > 0; q--)
         {
-            if (data[q] != null) minData = data[q];
+            if (Data[q] != null) minData = Data[q];
         }
 
-        for(int p = i+1; p < data.Length; p++)
+        for(int p = i+1; p < Data.Length; p++)
         {
-            if (data[p] != null) maxData = data[p];
+            if (Data[p] != null) maxData = Data[p];
         }
         
         InterpolateValues(minData, maxData, i);
@@ -36,6 +36,11 @@ public class DataInterpolator : MonoBehaviour
 
     private void InterpolateValues(DataSO minData, DataSO maxData, int index)
     {
+        for(int i = 0; i<Data[index].frequencies.Length; i++)
+        {
+            int mean = (minData.frequencies[i] + maxData.frequencies[i])/2;
 
+            Data[index].frequencies[i] = mean;
+        }
     }
 }
