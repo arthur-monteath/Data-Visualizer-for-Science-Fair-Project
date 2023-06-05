@@ -1008,7 +1008,6 @@ GameObject:
   - component: {fileID: 1599555681}
   - component: {fileID: 1599555680}
   - component: {fileID: 1599555679}
-  - component: {fileID: 1599555682}
   m_Layer: 5
   m_Name: Min Max Slider
   m_TagString: Untagged
@@ -1147,19 +1146,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599555677}
   m_CullTransparentMesh: 0
---- !u!114 &1599555682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599555677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4012dfe4f8660b48bdfa96ba1107087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chartPiece: {fileID: 0}
 --- !u!1 &1893799841
 GameObject:
   m_ObjectHideFlags: 0

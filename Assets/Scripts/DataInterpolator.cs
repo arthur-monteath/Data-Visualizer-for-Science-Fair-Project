@@ -8,17 +8,23 @@ public class DataInterpolator : MonoBehaviour
     [SerializeField] private DataSO[] data;
 
     [SerializeField] public static DataSO[] Data { get; private set; }
-
+    public static double[][] Frequencies { get; private set; }
+    
     private void Awake()
     {
+        Frequencies = new double[82][];
+
         Data = data;
 
-        for(int i = 0; i < Data.Length; i++)
+        for(int i = 0; i < data.Length; i++)
         {
-            if (Data[i] == null)
+            if (data[i] == null)
             {
-                Debug.Log(i);
                 InterpolateMissingData(i);
+            }
+            else
+            {
+                Frequencies[i] = data[i].frequencies;
             }
         }
     }
@@ -27,14 +33,22 @@ public class DataInterpolator : MonoBehaviour
     {
         DataSO minData = null, maxData = null;
 
-        for(int q = i-1; q >= 0; q--)
+        for (int q = i - 1; q >= 0; q--)
         {
-            if (Data[q] != null) minData = Data[q];
+            if (Data[q] != null)
+            {
+                minData = Data[q];
+                break;
+            }
         }
 
-        for(int p = i+1; p < Data.Length; p++)
+        for (int p = i + 1; p < Data.Length; p++)
         {
-            if (Data[p] != null) maxData = Data[p];
+            if (Data[p] != null)
+            {
+                maxData = Data[p];
+                break;
+            }
         }
 
         Debug.Log("Min: " + minData + " Max: " + maxData);
@@ -44,17 +58,12 @@ public class DataInterpolator : MonoBehaviour
 
     private void InterpolateValues(DataSO minData, DataSO maxData, int index)
     {
-        Data[index] = ScriptableObject.CreateInstance<DataSO>();
-
-        data[index].age = index + 5;
-
-        Data[index].responses = Data[0].responses;
-
+        Frequencies[index] = new double[Data[0].frequencies.Length];
         for (int i = 0; i<Data[0].frequencies.Length; i++)
         {
             double mean = (minData.frequencies[i] + maxData.frequencies[i])/2.0;
 
-            Data[index].frequencies[i] = mean;
+            Frequencies[index][i] = mean;
         }
     }
 }

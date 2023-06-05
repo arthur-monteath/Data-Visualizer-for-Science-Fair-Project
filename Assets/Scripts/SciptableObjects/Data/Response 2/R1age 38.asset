@@ -19,7 +19,9 @@ MonoBehaviour:
   - Health
   - Myself
   - God
+  - Material Goods
   frequencies:
+  - 2
   - 0
   - 0
   - 0

@@ -22,13 +22,16 @@ public class PieChart : MonoBehaviour
 
         double[] finalPercentages = new double[length];
 
-        for (int k = 0; k < range; k++)
+        for (int k = 0; k < length; k++)
         {
             double sum = 0.0;
 
-            for (int i = (int)minAge; i <= maxAge; i++)
+            Debug.Log("minAge:" + minAge + " | maxAge:" + maxAge);
+
+            for (int i = (int)minAge-5; i <= maxAge-5; i++)
             {
-                sum += DataInterpolator.Data[i].frequencies[k];
+                Debug.Log("i: " + i + " | k: " + k);
+                sum += DataInterpolator.Frequencies[i][k];
             }
 
             finalPercentages[k] = sum / length;
@@ -36,19 +39,19 @@ public class PieChart : MonoBehaviour
 
         double percentagesUsed = 0.0;
 
-        for (int i = 0; i < range; i++)
+        for (int i = 0; i < length; i++)
         {
             float rotation = (float)(percentagesUsed * 360);
 
             percentagesUsed += finalPercentages[i];
 
-            Transform chartPiece = Instantiate(this.chartPiece);
+            Transform chartPieceInstance = Instantiate(this.chartPiece);
 
-            chartPiece.rotation.SetEulerAngles(0, 0, rotation);
+            chartPieceInstance.rotation.SetEulerAngles(0, 0, rotation);
 
-            chartPiece.GetComponent<Image>().fillAmount = (float)finalPercentages[i];
+            chartPieceInstance.GetComponent<Image>().fillAmount = (float)finalPercentages[i];
 
-            chartPiece.gameObject.SetActive(true);
+            chartPieceInstance.gameObject.SetActive(true);
         }
     }
 }

@@ -18,8 +18,12 @@ MonoBehaviour:
   - Friends
   - Health
   - Myself
-  - God
+  - Religion
+  - Material Goods
+  - School
   frequencies:
+  - 1
+  - 0
   - 0
   - 0
   - 0
