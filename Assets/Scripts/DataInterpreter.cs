@@ -16,12 +16,14 @@ public class DataInterpreter : MonoBehaviour
         return DataInterpolator.Data[0].responses;
     }
 
-    /*public int[] GetPercentages()
+    public int[] GetPercentages(int age)
     {
-        int[] percentages = new int[GetValues().Length];
+        int[] percentages = new int[DataInterpolator.Data[0].frequencies.Length];
 
-        return a;
-    }*/
+
+
+        return percentages;
+    }
 
     /*public int[][] GetValues()
     {

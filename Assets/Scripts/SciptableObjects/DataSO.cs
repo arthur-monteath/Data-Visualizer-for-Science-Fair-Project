@@ -8,5 +8,5 @@ public class DataSO : ScriptableObject
     public int age;
 
     public string[] responses;
-    public int[] frequencies;
+    public double[] frequencies;
 }
