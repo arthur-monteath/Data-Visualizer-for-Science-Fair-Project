@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   age: 52
   responses:
-  - Family
-  - Friends
   - Health
-  - Myself
-  - God
+  - Changes within Self
+  - Money
+  - Family/Friends
+  - Can't Tell
+  - Work/School
   frequencies:
+  - 1
+  - 3
   - 0
   - 0
   - 0
-  - 0
-  - 0
+  - 1

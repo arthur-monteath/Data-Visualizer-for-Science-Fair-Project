@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class PieChart : MonoBehaviour
 {
-    [SerializeField] private Transform chartPiece;
+    [SerializeField] private Color[] colors;
+
+    [SerializeField] private Transform[] chartPieces;
+    [SerializeField] private Transform[] chartTexts;
 
     private void Start()
     {
@@ -20,7 +23,7 @@ public class PieChart : MonoBehaviour
 
         int length = DataInterpolator.Data[0].frequencies.Length;
 
-        double[] finalPercentages = new double[length];
+        double[] initialPercentages = new double[length];
 
         for (int k = 0; k < length; k++)
         {
@@ -34,7 +37,21 @@ public class PieChart : MonoBehaviour
                 sum += DataInterpolator.Frequencies[i][k];
             }
 
-            finalPercentages[k] = sum / length;
+            initialPercentages[k] = sum / range;
+        }
+
+        double[] finalPercentages = new double[length];
+
+        double sumOfPercentages = 0.0;
+
+        for(int i = 0; i < length; i++)
+        {
+            sumOfPercentages += initialPercentages[i];
+        }
+
+        for(int i = 0; i < length; i++)
+        {
+            finalPercentages[i] = initialPercentages[i] / sumOfPercentages;
         }
 
         double percentagesUsed = 0.0;
@@ -45,11 +62,23 @@ public class PieChart : MonoBehaviour
 
             percentagesUsed += finalPercentages[i];
 
-            Transform chartPieceInstance = Instantiate(this.chartPiece);
+            Debug.Log(finalPercentages[i]);
 
-            chartPieceInstance.rotation.SetEulerAngles(0, 0, rotation);
+            Transform chartPieceInstance = chartPieces[i];
+
+            chartPieceInstance.rotation = Quaternion.Euler(new Vector3(0, 0, -rotation));
 
             chartPieceInstance.GetComponent<Image>().fillAmount = (float)finalPercentages[i];
+
+            chartPieceInstance.GetComponent<Image>().color = colors[i];
+
+            Transform chartText = chartTexts[i];
+
+            chartText.GetComponent<Text>().text = "" + DataInterpolator.Data[0].responses[i] + " => " + Math.Round(finalPercentages[i]*100, 2) + "%";
+
+            chartText.GetComponentInChildren<Image>().color = colors[i];
+
+            chartText.gameObject.SetActive(true);
 
             chartPieceInstance.gameObject.SetActive(true);
         }
